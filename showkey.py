@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import array, fcntl, struct, termios, os, sys, tty
-import signal, datetime, time, subprocess, thread
+import signal, datetime, time, thread
 
 termios.KDGKBMODE = 0x4B44
 termios.KDSKBMODE = 0x4B45
@@ -29,7 +29,7 @@ def open_a_console(filename):
     f = open_a_file(filename, os.O_RDWR) or open_a_file(filename, os.O_WRONLY) or open_a_file(filename, os.O_RDONLY)
     if not f:
         return f
-    print filename
+    #print filename
     
     if not is_a_console(f):
         return None
@@ -106,6 +106,7 @@ class ShowKey:
         fd = self.fd
 
         if self.fd == None:
+            print "ERROR: Could not find appropriate file for monitoring. You might want to try 'sudo'"
             sys.exit(1)
     
         buf = array.array('i', [0])
