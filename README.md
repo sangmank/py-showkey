@@ -10,6 +10,7 @@ Useful for handling HID devices that generate key types.
 In most case, `sudo` would be necessary.
 
 usage (code snippet from showkey.py):
+    from showkey import ShowKey
 
     sk = ShowKey()
     sk.addKeyAction("*p", key_pressed)  # adds handler for all key press
@@ -17,3 +18,6 @@ usage (code snippet from showkey.py):
     sk.addKeyAction([16, 56], alt_q)    # adds handler for Alt-Q comb.
     sk.run()
 
+Reference
+=========
+* [Linux key code table](http://www.comptechdoc.org/os/linux/howlinuxworks/linux_hlkeycodes.html)
