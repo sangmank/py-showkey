@@ -10,8 +10,9 @@ Useful for handling HID devices that generate key types.
 In most case, `sudo` would be necessary.
 
 usage (code snippet from showkey.py):
-    from showkey import ShowKey
 
+    from showkey import ShowKey
+    
     sk = ShowKey()
     sk.addKeyAction("*p", key_pressed)  # adds handler for all key press
     sk.addKeyAction("*r", key_released) # adds handler for all key release
