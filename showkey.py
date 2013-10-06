@@ -82,18 +82,22 @@ class Key:
                 return False
         return False
 
+lastTimeCalled = {}
+
 def RateLimited(maxPerSecond):
     minInterval = 1.0 / float(maxPerSecond)
+
     def decorate(func):
-        lastTimeCalled = [datetime.datetime.now()]
+        global lastTimeCalled
+        lastTimeCalled[func] = datetime.datetime.now()
         def rateLimitedFunction(*args,**kargs):
             now = datetime.datetime.now()
-            elapsed = now - lastTimeCalled[0]
+            elapsed = now - lastTimeCalled[func]
             leftToWait = minInterval - elapsed.total_seconds()
             if leftToWait>0:
                 return 0
+            lastTimeCalled[func] = now
             ret = func(*args,**kargs)
-            lastTimeCalled[0] = now
             return ret
         return rateLimitedFunction
     return decorate
